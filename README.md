@@ -29,3 +29,10 @@ Incluye:
 ```bash
 cp .env.template .env
 docker-compose up --build
+
+Esto levantará:
+
+El backend en http://localhost:8000
+
+El frontend en http://localhost:4200
+
