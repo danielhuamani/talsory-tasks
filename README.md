@@ -22,4 +22,10 @@ Incluye:
 - Componentes UI usando **PrimeNG**.
 - Paginación, filtrado, validaciones y modales de confirmación.
 
----
+
+## 🚀 Cómo ejecutar el proyecto con Docker Compose
+
+
+```bash
+cp .env.template .env
+docker-compose up --build
