@@ -11,9 +11,9 @@ Este proyecto es el backend de una aplicación de gestión de tareas, desarrolla
 - `manage.py`: Script principal para comandos de Django.
 - `requirements.txt`: Lista de dependencias del proyecto.
 
-## 🚀 Puesta en marcha
+## 🚀 Cómo iniciar
 
-### 🐳 Usando Docker (recomendado para desarrollo)
+### Usando Docker
 Posicionarse en la raiz del proyecto
 
 ```bash
