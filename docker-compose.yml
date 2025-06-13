@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./talsory-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./talsory-backend:/app
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+
+  frontend:
+    build:
+      context: ./talsory-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./talsory-frontend:/app
+      - /app/node_modules
+    command: npm run start
+    stdin_open: true
+    tty: true
