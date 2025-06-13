@@ -1,0 +1,28 @@
+<div class="auth-wrapper mt-4">
+  <div class="flex justify-center items-center h-full">
+    <p-card header="Iniciar Sesión" class="auth-card w-lg">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-fluid">
+        <div class="mt-4">
+          <div class="field">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" type="email" pInputText formControlName="email" class="w-full" />
+            <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500">Email inválido o requerido</small>
+          </div>
+
+          <div class="field mt-4">
+            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+            <input id="password" type="password" pInputText formControlName="password" class="w-full" />
+            <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-500">Contraseña es requerida</small>
+          </div>
+        </div>
+
+        <p-message *ngIf="error" severity="error" text="{{ error }}"></p-message>
+
+        <div>
+          <button type="submit" class="mt-4" pButton label="Iniciar sesión" [loading]="loading" [disabled]="loading"></button>
+          <a class="ml-4 text-sm" routerLink="/register">Registrarse</a>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>

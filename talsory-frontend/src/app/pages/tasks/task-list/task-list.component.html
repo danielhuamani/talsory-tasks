@@ -1,0 +1,104 @@
+<div class="flex justify-between items-center mb-6">
+  <div class="flex gap-4">
+    <p-dropdown
+    [options]="statusOptions"
+    [(ngModel)]="selectedStatus"
+    optionLabel="label"
+    optionValue="value"
+    placeholder="Filtrar por estado"
+    class="w-48"
+    (onChange)="filterTasks()"
+    />
+
+    <p-dropdown
+    [options]="priorityOptions"
+    [(ngModel)]="selectedPriority"
+    optionLabel="label"
+    optionValue="value"
+    placeholder="Filtrar por prioridad"
+    class="w-48"
+    (onChange)="filterTasks()"
+    />
+  </div>
+
+  <button
+    pButton
+    label="Agregar Tarea"
+    icon="pi pi-plus"
+    class="p-button-sm p-button-success"
+    (click)="createTask()"
+  ></button>
+</div>
+
+<p-table
+  [value]="tasks"
+  class="p-datatable-sm"
+  [loading]="loading"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Fecha Creación</th>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Estado</th>
+      <th>Fecha Límite</th>
+      <th>Prioridad</th>
+      <th>Acciones</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-task>
+    <tr>
+      <td>{{ task.created_at | date: 'dd-MM-yyyy' }}</td>
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.status_display }}</td>
+      <td>{{ task.due_date | date: 'dd-MM-yyyy' }}</td>
+      <td>{{ task.priority_display }}</td>
+      <td>
+        <button
+          pButton
+          icon="pi pi-pencil"
+          class="p-button-sm p-button-text"
+          (click)="editTask(task)"
+        ></button>
+        <button
+          pButton
+          icon="pi pi-trash"
+          class="p-button-sm p-button-text p-button-danger"
+          (click)="deleteTask(task)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog 
+  header="¿Estás seguro?"
+  icon="pi pi-exclamation-triangle"
+  acceptLabel="Eliminar"
+  rejectLabel="Cancelar"
+  acceptButtonStyleClass="p-button-danger"
+  rejectButtonStyleClass="p-button-secondary"></p-confirmDialog>
+<div class="flex justify-between items-center mt-4">
+  <button
+    pButton
+    icon="pi pi-angle-left"
+    label="Anterior"
+    class="p-button-text"
+    [disabled]="currentPage === 1"
+    (click)="prevPage()"
+  ></button>
+
+  <span>Página {{ currentPage }} de {{ totalPages }}</span>
+
+  <button
+    pButton
+    icon="pi pi-angle-right"
+    iconPos="right"
+    label="Siguiente"
+    class="p-button-text"
+    [disabled]="currentPage === totalPages"
+    (click)="nextPage()"
+  ></button>
+</div>

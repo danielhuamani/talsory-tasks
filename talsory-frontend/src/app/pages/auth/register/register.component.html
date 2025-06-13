@@ -1,0 +1,49 @@
+<div class="auth-wrapper mt-4">
+  <div class="flex justify-center align-items-center h-full">
+    <p-card header="Registro de Usuario" class="auth-card w-lg">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="p-fluid">
+        <div class="mt-4">
+          <div class="field">
+            <label for="first_name" class="block text-sm font-medium text-gray-700">Nombres</label>
+            <input id="first_name" type="text" pInputText formControlName="first_name" class="w-full"
+                [ngClass]="{'ng-invalid ng-dirty': registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched}" />
+          </div>
+
+          <div class="field mt-4">
+            <label for="last_name" class="block text-sm font-medium text-gray-700">Apellidos</label>
+            <input id="last_name" type="text" pInputText formControlName="last_name" class="w-full"
+                [ngClass]="{'ng-invalid ng-dirty': registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched}" />
+          </div>
+
+          <div class="field mt-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" type="email" pInputText formControlName="email" class="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}" />
+          </div>
+
+          <div class="field mt-4">
+            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+            <input id="password" type="password" pInputText formControlName="password" class="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}" />
+
+          </div>
+
+          <div class="field mt-4">
+            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+            <input id="confirmPassword" type="password" pInputText formControlName="confirmPassword" class="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched}" />
+
+            <small *ngIf="registerForm.hasError('passwordMismatch') && registerForm.touched" class="text-red-500">Las contraseñas no coinciden</small>
+          </div>
+        </div>
+
+        <p-message *ngIf="error" severity="error" text="{{ error }}"></p-message>
+
+        <div>
+          <button type="submit" class="mt-4" pButton label="Registrarse" [loading]="loading" [disabled]="loading"></button>
+          <a class="ml-4 text-sm" routerLink="/login">Iniciar sesión</a>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="max-w-xl mx-auto p-6 bg-white shadow rounded">
+  <div class="mb-4">
+    <button
+      pButton
+      icon="pi pi-arrow-left"
+      label="Volver"
+      class="p-button-text"
+      (click)="goBack()"
+    ></button>
+  </div>
+
+  <h2 class="text-xl font-semibold mb-4">Agregar Nueva Tarea</h2>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="space-y-5">
+    <div>
+      <label for="title" class="block font-medium mb-1">Título</label>
+      <input
+        id="title"
+        type="text"
+        pInputText
+        formControlName="title"
+        class="w-full"
+        [ngClass]="{ 'p-invalid': taskForm.get('title')?.invalid && taskForm.get('title')?.touched }"
+      />
+      <small *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="text-red-500">Título es requerido</small>
+    </div>
+
+    <div>
+      <label for="description" class="block font-medium mb-1">Descripción</label>
+      <input
+        id="description"
+        type="text"
+        pInputText
+        formControlName="description"
+        class="w-full"
+      />
+    </div>
+
+    <div>
+      <label for="status" class="block font-medium mb-1">Estado</label>
+      <p-dropdown
+        [options]="statusOptions"
+        formControlName="status"
+        placeholder="Seleccionar estado"
+        class="w-full"
+        [ngClass]="{ 'ng-invalid ng-touched': taskForm.get('status')?.invalid && taskForm.get('status')?.touched }"
+      ></p-dropdown>
+      <small *ngIf="taskForm.get('status')?.invalid && taskForm.get('status')?.touched" class="text-red-500">Estado es requerido</small>
+    </div>
+
+    <div>
+      <label for="priority" class="block font-medium mb-1">Prioridad</label>
+      <p-dropdown
+        [options]="priorityOptions"
+        formControlName="priority"
+        placeholder="Seleccionar prioridad"
+        class="w-full"
+        [ngClass]="{ 'ng-invalid ng-touched': taskForm.get('priority')?.invalid && taskForm.get('priority')?.touched }"
+      ></p-dropdown>
+      <small *ngIf="taskForm.get('priority')?.invalid && taskForm.get('priority')?.touched" class="text-red-500">Prioridad es requerida</small>
+    </div>
+
+    <div>
+      <label for="due_date" class="block font-medium mb-1">Fecha Límite</label>
+      <p-datepicker
+        formControlName="due_date"
+        dateFormat="dd-mm-yy"
+        class="w-full"
+        [ngClass]="{ 'ng-invalid ng-touched': taskForm.get('due_date')?.invalid && taskForm.get('due_date')?.touched }"
+      />
+      <small *ngIf="taskForm.get('due_date')?.invalid && taskForm.get('due_date')?.touched" class="text-red-500">Fecha límite es requerida</small>
+    </div>
+
+    <button
+      type="submit"
+      pButton
+      label="Guardar Tarea"
+      class="w-full mt-2"
+    ></button>
+  </form>
+</div>
